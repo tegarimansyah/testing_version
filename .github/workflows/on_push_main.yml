@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Check version
-        run: echo $(git describe --tags)
+        run: set -e && echo $(git describe --tags)
