@@ -15,4 +15,4 @@ jobs:
           fetch-depth: 0
 
       - name: Check version
-        run: set -e && echo $(git describe --tags)
+        run: set -e && echo $(git describe --tags --always)
