@@ -2,6 +2,8 @@ name: Build then Push to Docker Registry
 
 # Trigger on push to master or merge to master from PR
 on:
+  pull_request:
+    branches: [ master ]
   push:
     branches: [ master ]
     
@@ -68,11 +70,11 @@ jobs:
           #   TAGS=${DOCKER_IMAGE}:$VERSION
           # ------------------
           #
-          # Check by branch name
+          # Check by branch
           if [[ ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             TAGS=${DOCKER_IMAGE}:$VERSION
             # e.g: tegar.com/simple:0.1.0
-          else
+          else # if in pull request
             TAGS=${DOCKER_IMAGE}:$VERSION-dev-${GITHUB_SHA::8}
             # e.g: tegar.com/simple:0.1.0-dev-1234abcd
           fi
